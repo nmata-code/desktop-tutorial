@@ -26,7 +26,6 @@
   <main class="container py-5">
     <section class="bg-white p-4 rounded-4 shadow-sm">
       <h2 class="h5 mb-3">Contacto</h2>
-      <p class="text-muted mb-4"></p>
 
       <form id="contactForm" class="row g-3">
         <div class="col-12 col-md-6">
@@ -41,12 +40,12 @@
 
         <div class="col-12 col-md-6">
           <label class="form-label">Edad</label>
-          <input class="form-control" type="text" name="Edad" required>
+          <input class="form-control" type="text" name="edad" required>
         </div>
 
         <div class="col-12">
           <label class="form-label">Dudas</label>
-          <textarea class="form-control" name="Dudas" rows="4" required></textarea>
+          <textarea class="form-control" name="mensaje" rows="4" required></textarea>
         </div>
 
         <div class="col-12 d-flex gap-2">
@@ -70,16 +69,15 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
     import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-    // Tu configuración (Realtime Database usa databaseURL)
     const firebaseConfig = {
-  apiKey: "AIzaSyDAOMhAT7KHYs6Zp69TrwSA1sInqcKaMXU",
-  authDomain: "primerparcial-44eae.firebaseapp.com",
-  databaseURL: "https://primerparcial-44eae-default-rtdb.firebaseio.com",
-  projectId: "primerparcial-44eae",
-  storageBucket: "primerparcial-44eae.firebasestorage.app",
-  messagingSenderId: "632389962342",
-  appId: "1:632389962342:web:43f078f3a0472bdc4ffba7"
-};
+      apiKey: "TU_API_KEY",
+      authDomain: "primerparcial-44eae.firebaseapp.com",
+      databaseURL: "https://primerparcial-44eae-default-rtdb.firebaseio.com",
+      projectId: "primerparcial-44eae",
+      storageBucket: "primerparcial-44eae.firebasestorage.app",
+      messagingSenderId: "632389962342",
+      appId: "1:632389962342:web:43f078f3a0472bdc4ffba7"
+    };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
@@ -94,12 +92,13 @@
       const data = {
         nombre: form.nombre.value.trim(),
         email: form.email.value.trim(),
+        edad: form.edad.value.trim(),
         mensaje: form.mensaje.value.trim(),
         createdAt: serverTimestamp(),
         page: location.href
       };
 
-      if (!data.nombre || !data.email || !data.mensaje) {
+      if (!data.nombre || !data.email || !data.edad || !data.mensaje) {
         statusDiv.innerHTML = `<div class="alert alert-warning">Completa todos los campos.</div>`;
         return;
       }
@@ -108,11 +107,10 @@
       submitBtn.disabled = true;
 
       try {
-        // Crea un nuevo registro en /contactos con un id único
         const newRef = push(ref(db, "contactos"));
         await set(newRef, data);
 
-        statusDiv.innerHTML = `<div class="alert alert-success">✅ Mensaje enviado.</div>`;
+        statusDiv.innerHTML = `<div class="alert alert-success">✅ Mensaje enviado correctamente.</div>`;
         form.reset();
       } catch (err) {
         console.error(err);
