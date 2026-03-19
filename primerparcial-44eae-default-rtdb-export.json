@@ -1,0 +1,26 @@
+{
+  "contactos": {
+    "-OltJzCnOaqTxuxT9sxA": {
+      "createdAt": 1771562071324,
+      "edad": "24",
+      "email": "nmata@cocoschool.mx",
+      "mensaje": "Primer parcial, web",
+      "nombre": "Nayelli",
+      "page": "https://nmata-code.github.io/desktop-tutorial/contact.html"
+    }
+  }, 
+  "store": {
+    "item01": {
+      "categoria": "Clothing",
+      "imagen": "https://picsum.photos/600/400?random=801",
+      "nombre": "Nuevo gloss Moka",
+      "precio": 899
+    },
+    "item02": {
+      "categoria": "Clothing",
+      "imagen": "https://picsum.photos/600/400?random=801",
+      "nombre": "Rímel Cow Lashes",
+      "precio": 599
+    }
+  }
+}
