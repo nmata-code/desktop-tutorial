@@ -1,103 +1,91 @@
 /* =========================================================
-   Hoja de estilos complementaria a Bootstrap
-   ---------------------------------------------------------
-   Objetivo:
-   - Ajustar la apariencia visual del sitio
-   - Mantener compatibilidad con Bootstrap
-   - Evitar sobreescrituras agresivas
+   Guía Turística CDMX · Mundial 2026
+
    ========================================================= */
 
 
 /* ---------------------------------------------------------
-   1. Variables CSS (custom properties)
-   ---------------------------------------------------------
-   Se definen valores reutilizables para:
-   - colores base
-   - sombras
-   - bordes
-   - radios
-   Esto facilita la consistencia visual y el mantenimiento.
+   1. Colores
 --------------------------------------------------------- */
 :root {
-  --text: #111;
-  --muted: #6b7280;
-  --bg: #f6f7fb;
+  --verde-oscuro: #0f5132;
+  --verde-principal: #146c43;
+  --verde-claro: #d1e7dd;
+  --dorado: #c9a227;
+
+  --text: #0c2e1d;
+  --muted: #5c6f66;
+  --bg: #f1f8f5;
   --card: #ffffff;
-  --border: rgba(0,0,0,.08);
-  --shadow: 0 10px 30px rgba(0,0,0,.08);
-  --shadow-sm: 0 6px 18px rgba(0,0,0,.08);
+  --border: rgba(20,108,67,.15);
+
+  --shadow: 0 12px 35px rgba(15,81,50,.15);
+  --shadow-sm: 0 6px 18px rgba(15,81,50,.12);
   --radius: 18px;
 }
 
 
 /* ---------------------------------------------------------
-   2. Estilos base del documento
-   ---------------------------------------------------------
-   - Se define la tipografía general del sitio
-   - Se establece un fondo neutro con degradados suaves
-   - El fondo no interfiere con los componentes Bootstrap
+   2. Fondo general verde
 --------------------------------------------------------- */
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: var(--text);
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(13,110,253,.12), transparent 55%),
-    radial-gradient(900px 500px at 90% 0%, rgba(25,135,84,.12), transparent 55%),
+    radial-gradient(1000px 500px at 10% -10%, rgba(20,108,67,.15), transparent 55%),
+    radial-gradient(800px 400px at 90% 0%, rgba(201,162,39,.10), transparent 55%),
     var(--bg);
 }
 
 
 /* ---------------------------------------------------------
-   3. Encabezado y navegación
-   ---------------------------------------------------------
-   - Se mejora la legibilidad de los enlaces del menú
-   - Se añaden transiciones suaves para interacción
-   - No se modifica la estructura del navbar de Bootstrap
+   3. Header
 --------------------------------------------------------- */
 header {
-  backdrop-filter: blur(8px);
+  background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-principal));
+  box-shadow: var(--shadow-sm);
+}
+
+header h1 {
+  color: white#ffffff;
+  font-weight: 700;
+  letter-spacing: .5px;
 }
 
 header nav a {
   text-decoration: none;
-  color: var(--text);
+  color: #e9f7ef;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   transition: background .2s ease, transform .2s ease;
 }
 
 header nav a:hover {
-  background: rgba(0,0,0,.06);
+  background: rgba(255,255,255,.15);
   transform: translateY(-1px);
 }
 
-/* Estado visual para la página activa del menú */
 header nav a.active {
-  background: rgba(13,110,253,.12);
-  color: #0d6efd;
+  background: var(--dorado);
+  color: #000;
 }
 
 
 /* ---------------------------------------------------------
-   4. Secciones como contenedores visuales
-   ---------------------------------------------------------
-   - Las secciones se tratan como "tarjetas"
-   - Se definen bordes, fondo y radios
-   - Mantiene coherencia con el sistema de diseño
+   4. Secciones como tarjetas
 --------------------------------------------------------- */
 section {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
+  box-shadow: var(--shadow-sm);
+  border-left: 6px solid var(--verde-principal);
 }
 
 
 /* ---------------------------------------------------------
-   5. Sombras suaves
-   ---------------------------------------------------------
-   - Se redefine la clase shadow-sm para un efecto más sutil
-   - Se mantiene la convención de nombres de Bootstrap
+   5. Sombras
 --------------------------------------------------------- */
 .shadow-sm {
   box-shadow: var(--shadow-sm) !important;
@@ -106,9 +94,6 @@ section {
 
 /* ---------------------------------------------------------
    6. Imágenes
-   ---------------------------------------------------------
-   - Se garantiza que las imágenes no excedan su contenedor
-   - Se ajustan radios para coherencia visual
 --------------------------------------------------------- */
 img {
   max-width: 100%;
@@ -120,15 +105,12 @@ img.rounded-3 {
 
 
 /* ---------------------------------------------------------
-   7. Carousel
-   ---------------------------------------------------------
-   - Se fija una altura uniforme para las imágenes
-   - Se usa object-fit para evitar deformaciones
-   - Se ajusta la altura en pantallas pequeñas
+   7. Carrusel
 --------------------------------------------------------- */
 .carousel-inner img {
   height: 420px;
   object-fit: cover;
+  border-radius: 16px;
 }
 
 @media (max-width: 576px) {
@@ -140,9 +122,6 @@ img.rounded-3 {
 
 /* ---------------------------------------------------------
    8. Accordion
-   ---------------------------------------------------------
-   - Se suavizan bordes y tipografía
-   - Se elimina el contorno azul por defecto al hacer foco
 --------------------------------------------------------- */
 .accordion-item {
   border-color: var(--border);
@@ -150,6 +129,12 @@ img.rounded-3 {
 
 .accordion-button {
   font-weight: 600;
+  color: var(--verde-oscuro);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--verde-claro);
+  color: var(--verde-oscuro);
 }
 
 .accordion-button:focus {
@@ -158,26 +143,37 @@ img.rounded-3 {
 
 
 /* ---------------------------------------------------------
-   9. Botones
-   ---------------------------------------------------------
-   - Se redondean para un estilo más uniforme
-   - Se agrega retroalimentación visual al interactuar
+   9. Botones estilo fútbol
 --------------------------------------------------------- */
 .btn {
   border-radius: 999px;
   font-weight: 600;
+  transition: all .2s ease;
 }
 
-.btn:hover {
-  transform: translateY(-1px);
+.btn-success {
+  background: var(--verde-principal);
+  border: none;
+}
+
+.btn-success:hover {
+  background: var(--verde-oscuro);
+  transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+  border-color: var(--verde-principal);
+  color: var(--verde-principal);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--verde-principal);
+  color: white;
 }
 
 
 /* ---------------------------------------------------------
    10. Formularios
-   ---------------------------------------------------------
-   - Se suavizan bordes
-   - Se mejora el estado de enfoque para accesibilidad
 --------------------------------------------------------- */
 .form-control {
   border-radius: 14px;
@@ -185,31 +181,29 @@ img.rounded-3 {
 }
 
 .form-control:focus {
-  box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
-  border-color: rgba(13,110,253,.35);
+  box-shadow: 0 0 0 .2rem rgba(20,108,67,.2);
+  border-color: var(--verde-principal);
 }
 
 
 /* ---------------------------------------------------------
-   11. Pie de página
-   ---------------------------------------------------------
-   - Se separa visualmente del contenido principal
+   11. Footer
 --------------------------------------------------------- */
 footer {
-  border-top: 1px solid var(--border);
+  background: var(--verde-oscuro);
+  color: white;
+  border-top: none;
 }
 
 
 /* ---------------------------------------------------------
-   12. Clase utilitaria opcional
-   ---------------------------------------------------------
-   - Se puede usar para destacar una sección específica
-   - No es obligatoria para el funcionamiento del sitio
+   12. Temática
 --------------------------------------------------------- */
 .highlight {
   background: linear-gradient(
     135deg,
-    rgba(13,110,253,.10),
-    rgba(25,135,84,.08)
+    rgba(20,108,67,.15),
+    rgba(201,162,39,.10)
   );
+  border-left: 6px solid var(--dorado);
 }
