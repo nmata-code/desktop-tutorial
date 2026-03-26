@@ -1,8 +1,14 @@
-// js/firebase.js
+/*
+  Inicialización de Firebase
+  Exporta:
+  - db (base de datos)
+  - auth (autenticación)
+*/
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-/* Configuración del proyecto Firebase */
 const firebaseConfig = {
   apiKey: "AIzaSyDAOMhAT7KHYs6Zp69TrwSA1sInqcKaMXU",
   authDomain: "primerparcial-44eae.firebaseapp.com",
@@ -13,6 +19,7 @@ const firebaseConfig = {
   appId: "1:632389962342:web:43f078f3a0472bdc4ffba7"
 };
 
-/* Inicialización */
 const app = initializeApp(firebaseConfig);
+
 export const db = getDatabase(app);
+export const auth = getAuth(app);
