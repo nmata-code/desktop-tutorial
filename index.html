@@ -7,6 +7,49 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
+
+  <style>
+    /* HERO 3D */
+    .hero-3d {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      min-height: 400px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #0b0b12;
+    }
+
+    .hero-3d canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px;
+      color: white;
+      max-width: 700px;
+    }
+
+    .hero-content h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+    }
+
+    .hero-content p {
+      opacity: 0.7;
+      font-size: 1.1rem;
+      max-width: 500px;
+    }
+  </style>
 </head>
 
 <body class="bg-light">
@@ -25,11 +68,26 @@
 
   <main class="container py-5">
 
+    <!-- HERO CON 3D -->
+    <section class="hero-3d mb-4" id="hero3d">
+      <div class="hero-content">
+        <h2>Tu guía para vivir la CDMX durante el Mundial</h2>
+        <p>
+          Muévete fácil, come increíble y descubre los mejores planes
+          antes y después de cada partido.
+        </p>
+      </div>
+    </section>
+
+    <!-- TU SECCIÓN NORMAL -->
     <section class="bg-white p-4 rounded-4 shadow-sm">
       <h2 class="h5">Tu guía para vivirla al máximo durante el Mundial</h2>
-      <p class="text-muted">La CDMX se prepara para recibir al mundo. Ya sea que vengas por el fútbol o que vivas aquí y quieras redescubrirla, esta guía te ayuda a moverte fácil, comer increíble y encontrar los mejores planes antes y después de cada partido..</p>
+      <p class="text-muted">
+        La CDMX se prepara para recibir al mundo. Ya sea que vengas por el fútbol o que vivas aquí
+        y quieras redescubrirla, esta guía te ayuda a moverte fácil, comer increíble y encontrar
+        los mejores planes antes y después de cada partido.
+      </p>
 
-      <!-- NUEVO: botón disparador del modal -->
       <button
         class="btn btn-dark"
         data-bs-toggle="modal"
@@ -40,7 +98,7 @@
 
   </main>
 
-  <!-- NUEVO: modal completo (se pega al final del body) -->
+  <!-- MODAL -->
   <div class="modal fade" id="modalResena" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -53,12 +111,16 @@
         <div class="modal-body">
           <p class="mb-3">Desde tacos, pambazos, sopes, huaraches, quesadillas, botanas, etc.</p>
 
-          <!-- NUEVO: video responsive -->
           <div class="ratio ratio-16x9">
             <iframe
-             iframe width="560" height="315" src="https://www.youtube.com/embed/hyJu8qTkNfM?si=ZX2gA7V2-Ifs3DW3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-              title="Review"
-              allowfullscreen></iframe>
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/hyJu8qTkNfM?si=ZX2gA7V2-Ifs3DW3"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
 
@@ -70,7 +132,136 @@
     </div>
   </div>
 
-  <!-- Actividad 0: Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- IMPORTMAP THREE.JS -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js"
+      }
+    }
+  </script>
+
+  <!-- SCRIPT 3D -->
+  <script type="module">
+    import * as THREE from 'three';
+
+    const hero = document.getElementById('hero3d');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      hero.clientWidth / hero.clientHeight,
+      0.1,
+      100
+    );
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(hero.clientWidth, hero.clientHeight);
+    renderer.setClearColor(0x000000, 0);
+    hero.appendChild(renderer.domElement);
+
+    camera.position.set(3.5, 1.5, 4);
+    camera.lookAt(0, 0, 0);
+
+    // OBJETO 3D
+    const geo = new THREE.TorusKnotGeometry(1, 0.32, 200, 32);
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0x6366f1,
+      roughness: 0.15,
+      metalness: 0.9,
+    });
+
+    const objeto = new THREE.Mesh(geo, mat);
+    scene.add(objeto);
+
+    // LUCES
+    const luzPrincipal = new THREE.DirectionalLight(0xffffff, 3);
+    luzPrincipal.position.set(5, 8, 5);
+    scene.add(luzPrincipal);
+
+    const luzMorada = new THREE.PointLight(0x818cf8, 6, 12, 2);
+    luzMorada.position.set(-4, 2, 3);
+    scene.add(luzMorada);
+
+    const luzVerde = new THREE.PointLight(0x34d399, 4, 10, 2);
+    luzVerde.position.set(2, -4, 2);
+    scene.add(luzVerde);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+    // PARTÍCULAS
+    const particleGeo = new THREE.BufferGeometry();
+    const count = 800;
+    const posiciones = new Float32Array(count * 3);
+
+    for (let i = 0; i < count * 3; i++) {
+      posiciones[i] = (Math.random() - 0.5) * 14;
+    }
+
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(posiciones, 3));
+
+    const particleMat = new THREE.PointsMaterial({
+      color: 0x818cf8,
+      size: 0.025,
+      transparent: true,
+      opacity: 0.6,
+    });
+
+    const particulas = new THREE.Points(particleGeo, particleMat);
+    scene.add(particulas);
+
+    // INTERACCIÓN MOUSE
+    const mouse = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+
+    hero.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // ANIMACIÓN
+    const reloj = new THREE.Clock();
+
+    function animar() {
+      requestAnimationFrame(animar);
+
+      const t = reloj.getElapsedTime();
+
+      objeto.rotation.x = t * 0.15;
+      objeto.rotation.y = t * 0.2;
+
+      target.x += (mouse.x - target.x) * 0.03;
+      target.y += (mouse.y - target.y) * 0.03;
+
+      objeto.rotation.x += target.y * 0.3;
+      objeto.rotation.y += target.x * 0.3;
+
+      objeto.position.y = Math.sin(t * 0.6) * 0.12;
+
+      particulas.rotation.y = t * 0.02;
+      particulas.rotation.x = t * 0.01;
+
+      luzMorada.position.x = Math.sin(t * 0.4) * 5;
+      luzMorada.position.z = Math.cos(t * 0.4) * 4;
+
+      luzVerde.position.x = Math.cos(t * 0.3) * 4;
+      luzVerde.position.y = Math.sin(t * 0.3) * -4;
+
+      renderer.render(scene, camera);
+    }
+
+    animar();
+
+    // RESPONSIVE
+    window.addEventListener('resize', () => {
+      camera.aspect = hero.clientWidth / hero.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(hero.clientWidth, hero.clientHeight);
+    });
+  </script>
+
 </body>
 </html>
