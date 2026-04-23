@@ -15,7 +15,7 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "marble_bust_01",
+      "name": "augusto",
       "translation": [
         0,
         0.028335653245449066,
@@ -26,7 +26,7 @@
   "materials": [
     {
       "doubleSided": true,
-      "name": "marble_bust_01",
+      "name": "augusto",
       "normalTexture": {
         "index": 0
       },
@@ -43,7 +43,7 @@
   ],
   "meshes": [
     {
-      "name": "marble_bust_01",
+      "name": "augusto",
       "primitives": [
         {
           "attributes": {
