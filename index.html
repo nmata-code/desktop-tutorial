@@ -1,155 +1,240 @@
 <!doctype html>
 <html lang="es">
+
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guía turística de la CDMX</title>
 
+  <title>The Cabinet | Guillermo del Toro Archive</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- BOOTSTRAP -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
 
-  <style>
-    /* HERO 3D */
-    .hero-3d {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      min-height: 400px;
-      overflow: hidden;
-      border-radius: 20px;
-      background: #0b0b12;
-    }
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
 
-    .hero-3d canvas {
-      position: absolute;
-      inset: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 50px;
-      color: white;
-      max-width: 700px;
-    }
-
-    .hero-content h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-    }
-
-    .hero-content p {
-      opacity: 0.7;
-      font-size: 1.1rem;
-      max-width: 500px;
-    }
-  </style>
 </head>
 
-<body class="bg-light">
+<body>
 
-  <header class="bg-white border-bottom sticky-top">
-    <div class="container py-3 d-flex justify-content-between align-items-center">
-      <h1 class="h4 m-0">Descubre la Ciudad de México</h1>
-      <nav class="d-flex gap-3">
+  <!-- NAVBAR -->
+
+  <header class="main-header">
+
+    <nav class="navbar-custom">
+
+      <a href="index.html" class="logo">
+        THE CABINET
+      </a>
+
+      <div class="nav-links">
         <a href="index.html">Inicio</a>
+        <a href="tienda.html">Tienda</a>
         <a href="about.html">Acerca</a>
         <a href="contact.html">Contacto</a>
-        <a href="tienda.html">Tienda</a>
-      </nav>
-    </div>
+        <a href="carrito.html">Carrito</a>
+        <a href="login.html" id="userLink">
+  Cuenta
+</a>
+      </div>
+
+    </nav>
+
   </header>
 
-  <main class="container py-5">
+  <!-- HERO -->
 
-    <!-- HERO CON 3D -->
-    <section class="hero-3d mb-4" id="hero3d">
-      <div class="hero-content">
-        <h2>Tu guía para vivir la CDMX durante el Mundial</h2>
-        <p>
-          Muévete fácil, come increíble y descubre los mejores planes
-          antes y después de cada partido.
-        </p>
-      </div>
-    </section>
+  <section class="hero">
 
-    <!-- TU SECCIÓN NORMAL -->
-    <section class="bg-white p-4 rounded-4 shadow-sm">
-      <h2 class="h5">Tu guía para vivirla al máximo durante el Mundial</h2>
-      <p class="text-muted">
-        La CDMX se prepara para recibir al mundo. Ya sea que vengas por el fútbol o que vivas aquí
-        y quieras redescubrirla, esta guía te ayuda a moverte fácil, comer increíble y encontrar
-        los mejores planes antes y después de cada partido.
+    <div class="hero-left">
+
+      <p class="hero-tag">
+        Guillermo del Toro Tribute Archive
       </p>
 
-      <button
-        class="btn btn-dark"
-        data-bs-toggle="modal"
-        data-bs-target="#modalResena">
-        Recomendaciones para comer
-      </button>
-    </section>
+      <h1 class="hero-title">
+        CINEMA OF MONSTERS,
+        MEMORY &
+        WONDER
+      </h1>
 
-  </main>
+      <p class="hero-description">
+        Una colección inspirada en el universo cinematográfico de Guillermo del Toro:
+        criaturas, reliquias, cuentos oscuros y fantasía artesanal convertida en archivo digital.
+      </p>
 
-  <!-- MODAL -->
-  <div class="modal fade" id="modalResena" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
+      <a href="tienda.html" class="hero-btn">
+        Explorar colección
+      </a>
 
-        <div class="modal-header">
-          <h5 class="modal-title">Recomendaciones de "La Ruta de la Garnacha"</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
+    </div>
 
-        <div class="modal-body">
-          <p class="mb-3">Desde tacos, pambazos, sopes, huaraches, quesadillas, botanas, etc.</p>
+    <div class="hero-right">
 
-          <div class="ratio ratio-16x9">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/hyJu8qTkNfM?si=ZX2gA7V2-Ifs3DW3"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
+      <div id="hero3d"></div>
 
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
+      <div class="hero-overlay"></div>
+
+    </div>
+
+  </section>
+
+  <!-- HOMENAJE -->
+
+  <section class="tribute">
+
+    <div class="tribute-container">
+
+      <div class="tribute-text">
+
+        <h2>
+          Un gabinete cinematográfico
+        </h2>
+
+        <p>
+          Guillermo del Toro transforma monstruos en memorias,
+          la fantasía en duelo y lo imposible en algo íntimo.
+          Este archivo digital reúne posters, libros y reliquias
+          inspiradas en su universo visual.
+        </p>
 
       </div>
+
+      <div class="tribute-images">
+
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop">
+
+        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1200&auto=format&fit=crop">
+
+        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop">
+
+        <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?q=80&w=1200&auto=format&fit=crop">
+
+      </div>
+
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </section>
 
-  <!-- IMPORTMAP THREE.JS -->
+  <!-- DESTACADOS -->
+
+  <section class="featured">
+
+    <h2 class="section-title">
+      Colección destacada
+    </h2>
+
+    <div class="products-grid">
+
+      <article class="product-card">
+
+        <img src="png/Laberinto.png">
+
+        <div class="product-info">
+
+          <p class="product-category">
+            Poster
+          </p>
+
+          <h3 class="product-title">
+            El laberinto del Fauno
+          </h3>
+
+          <p class="product-price">
+            $350 MXN
+          </p>
+
+        </div>
+
+      </article>
+
+      <article class="product-card">
+
+        <img src="png/Pinocho 2.png">
+
+        <div class="product-info">
+
+          <p class="product-category">
+            Figuras
+          </p>
+
+          <h3 class="product-title">
+            Figura Pinocho
+          </h3>
+
+          <p class="product-price">
+            $680 MXN
+          </p>
+
+        </div>
+
+      </article>
+
+      <article class="product-card">
+
+        <img src="png/Bocetos.png">
+
+        <div class="product-info">
+
+          <p class="product-category">
+            Libros
+          </p>
+
+          <h3 class="product-title">
+            Libro de bocetos
+          </h3>
+
+          <p class="product-price">
+            $540 MXN
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <h3>
+      THE CABINET
+    </h3>
+
+    <p>
+      A Guillermo del Toro Tribute Archive
+    </p>
+
+  </footer>
+
+  <!-- THREE JS -->
+
   <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js"
-      }
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js"
     }
+  }
   </script>
 
-  <!-- SCRIPT 3D -->
   <script type="module">
+
     import * as THREE from 'three';
 
     const hero = document.getElementById('hero3d');
 
     const scene = new THREE.Scene();
+
     const camera = new THREE.PerspectiveCamera(
       60,
       hero.clientWidth / hero.clientHeight,
@@ -157,111 +242,122 @@
       100
     );
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    const renderer = new THREE.WebGLRenderer({
+      antialias:true,
+      alpha:true
+    });
+
     renderer.setSize(hero.clientWidth, hero.clientHeight);
-    renderer.setClearColor(0x000000, 0);
+
     hero.appendChild(renderer.domElement);
 
-    camera.position.set(3.5, 1.5, 4);
-    camera.lookAt(0, 0, 0);
+    camera.position.z = 5;
 
-    // OBJETO 3D
-    const geo = new THREE.TorusKnotGeometry(1, 0.32, 200, 32);
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x6366f1,
-      roughness: 0.15,
-      metalness: 0.9,
-    });
+    const particlesGeometry = new THREE.BufferGeometry();
 
-    const objeto = new THREE.Mesh(geo, mat);
-    scene.add(objeto);
+    const count = 2500;
 
-    // LUCES
-    const luzPrincipal = new THREE.DirectionalLight(0xffffff, 3);
-    luzPrincipal.position.set(5, 8, 5);
-    scene.add(luzPrincipal);
+    const positions = new Float32Array(count * 3);
 
-    const luzMorada = new THREE.PointLight(0x818cf8, 6, 12, 2);
-    luzMorada.position.set(-4, 2, 3);
-    scene.add(luzMorada);
+    for(let i = 0; i < count * 3; i++){
 
-    const luzVerde = new THREE.PointLight(0x34d399, 4, 10, 2);
-    luzVerde.position.set(2, -4, 2);
-    scene.add(luzVerde);
+      positions[i] = (Math.random() - 0.5) * 12;
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
-
-    // PARTÍCULAS
-    const particleGeo = new THREE.BufferGeometry();
-    const count = 800;
-    const posiciones = new Float32Array(count * 3);
-
-    for (let i = 0; i < count * 3; i++) {
-      posiciones[i] = (Math.random() - 0.5) * 14;
     }
 
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(posiciones, 3));
+    particlesGeometry.setAttribute(
+      'position',
+      new THREE.BufferAttribute(positions,3)
+    );
 
-    const particleMat = new THREE.PointsMaterial({
-      color: 0x818cf8,
-      size: 0.025,
-      transparent: true,
-      opacity: 0.6,
+    const particlesMaterial = new THREE.PointsMaterial({
+      color:0xc89a3d,
+      size:0.03,
+      transparent:true,
+      opacity:0.7
     });
 
-    const particulas = new THREE.Points(particleGeo, particleMat);
-    scene.add(particulas);
+    const particles = new THREE.Points(
+      particlesGeometry,
+      particlesMaterial
+    );
 
-    // INTERACCIÓN MOUSE
-    const mouse = { x: 0, y: 0 };
-    const target = { x: 0, y: 0 };
+    scene.add(particles);
 
-    hero.addEventListener('mousemove', (e) => {
-      mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
-    });
+    const light1 = new THREE.PointLight(0xc89a3d, 10);
 
-    // ANIMACIÓN
-    const reloj = new THREE.Clock();
+    light1.position.set(2,2,4);
 
-    function animar() {
-      requestAnimationFrame(animar);
+    scene.add(light1);
 
-      const t = reloj.getElapsedTime();
+    const ambient = new THREE.AmbientLight(0xffffff, 0.2);
 
-      objeto.rotation.x = t * 0.15;
-      objeto.rotation.y = t * 0.2;
+    scene.add(ambient);
 
-      target.x += (mouse.x - target.x) * 0.03;
-      target.y += (mouse.y - target.y) * 0.03;
+    function animate(){
 
-      objeto.rotation.x += target.y * 0.3;
-      objeto.rotation.y += target.x * 0.3;
+      requestAnimationFrame(animate);
 
-      objeto.position.y = Math.sin(t * 0.6) * 0.12;
+      particles.rotation.y += 0.0008;
 
-      particulas.rotation.y = t * 0.02;
-      particulas.rotation.x = t * 0.01;
+      particles.rotation.x += 0.0002;
 
-      luzMorada.position.x = Math.sin(t * 0.4) * 5;
-      luzMorada.position.z = Math.cos(t * 0.4) * 4;
+      renderer.render(scene,camera);
 
-      luzVerde.position.x = Math.cos(t * 0.3) * 4;
-      luzVerde.position.y = Math.sin(t * 0.3) * -4;
-
-      renderer.render(scene, camera);
     }
 
-    animar();
+    animate();
 
-    // RESPONSIVE
     window.addEventListener('resize', () => {
+
       camera.aspect = hero.clientWidth / hero.clientHeight;
+
       camera.updateProjectionMatrix();
-      renderer.setSize(hero.clientWidth, hero.clientHeight);
+
+      renderer.setSize(
+        hero.clientWidth,
+        hero.clientHeight
+      );
+
     });
+
   </script>
+
+<script type="module">
+
+import { auth } from "./js/firebase.js";
+
+import {
+
+  onAuthStateChanged,
+
+  signOut
+
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const userLink = document.getElementById("userLink");
+
+onAuthStateChanged(auth, (user) => {
+
+  if(user){
+
+    userLink.textContent = user.email;
+
+    userLink.href = "#";
+
+    userLink.addEventListener("click", async () => {
+
+      await signOut(auth);
+
+      window.location.reload();
+
+    });
+
+  }
+
+});
+
+</script>
 
 </body>
 </html>

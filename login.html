@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login | The Cabinet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+
+</head>
+
+<body>
+
+  <section class="login-section">
+
+    <div class="login-box">
+
+      <h1>
+        Entrar al Archivo
+      </h1>
+
+      <form id="loginForm">
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Correo"
+          required
+        >
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Contraseña"
+          required
+        >
+
+        <button type="submit">
+          Entrar
+        </button>
+
+      </form>
+
+      <button id="registerBtn">
+        Crear cuenta
+      </button>
+
+      <p id="mensaje"></p>
+
+    </div>
+
+  </section>
+
+  <script type="module">
+
+    import { auth } from "./js/firebase.js";
+
+    import {
+
+      createUserWithEmailAndPassword,
+
+      signInWithEmailAndPassword
+
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+    const form = document.getElementById("loginForm");
+
+    const mensaje = document.getElementById("mensaje");
+
+    const registerBtn = document.getElementById("registerBtn");
+
+    form.addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+
+      const password = document.getElementById("password").value;
+
+      try{
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        window.location.href = "index.html";
+
+      }catch(error){
+
+        mensaje.textContent = error.message;
+
+      }
+
+    });
+
+    registerBtn.addEventListener("click", async () => {
+
+      const email = document.getElementById("email").value;
+
+      const password = document.getElementById("password").value;
+
+      try{
+
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        mensaje.textContent = "Cuenta creada";
+
+      }catch(error){
+
+        mensaje.textContent = error.message;
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

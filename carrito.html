@@ -1,54 +1,232 @@
 <!doctype html>
 <html lang="es">
+
 <head>
-  <meta charset="utf-8">
-  <title>Carrito</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Producto · The Cabinet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="styles.css">
+
 </head>
-<body>
 
-<header class="bg-white border-bottom sticky-top">
-    <div class="container py-3 d-flex justify-content-between align-items-center">
-      <h1 class="h4 m-0">Descubre la Ciudad de México</h1>
-      <nav class="d-flex gap-3">
-        <a href="index.html">Inicio</a>
-        <a href="about.html">Acerca</a>
-        <a href="contact.html">Contacto</a>
-        <a href="tienda.html">Store</a>
-      </nav>
-    </div>
-  </header>
+<body class="cart-page">
 
-<div class="container py-5">
-  <h2>Mi carrito</h2>
+<header class="main-header">
 
-  <div id="cartStatus"></div>
-  <div id="cartList"></div>
+  <nav class="navbar-custom">
+
+    <a href="index.html" class="logo">
+      THE CABINET
+    </a>
+
+<div class="nav-links">
+
+  <a href="index.html">Inicio</a>
+
+  <a href="tienda.html">Tienda</a>
+
+  <a href="about.html">Acerca</a>
+
+  <a href="contact.html">Contacto</a>
+
+  <a href="carrito.html">Carrito</a>
+
+  <a href="login.html" id="userLink">
+    Cuenta
+  </a>
+
 </div>
 
+  </nav>
+
+</header>
+
+<section class="featured">
+
+  <h1 class="section-title">
+    Tu Carrito
+  </h1>
+
+  <div id="carritoContainer" class="products-grid">
+
+  </div>
+
+  <div class="cart-actions">
+
+    <button id="confirmarBtn" class="hero-btn">
+      Confirmar compra
+    </button>
+
+  </div>
+
+</section>
+
 <script type="module">
-  import { listenUserCart } from "./js/carrito.js";
 
-  const list = document.getElementById("cartList");
-  const status = document.getElementById("cartStatus");
+import { db, auth } from "./js/firebase.js";
 
-  listenUserCart((items) => {
-    if (items.length === 0) {
-      status.innerHTML = "Carrito vacío o sin sesión";
-      list.innerHTML = "";
-      return;
-    }
+import {
 
-    status.innerHTML = "Productos: " + items.length;
+  ref,
+  onValue,
+  remove,
+  push
 
-    list.innerHTML = items.map(i => `
-      <div class="border p-2 mb-2">
-        <strong>${i.nombre}</strong>
-        <div>$${i.precio}</div>
-      </div>
-    `).join("");
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+import {
+
+  onAuthStateChanged,
+  signOut
+
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const container = document.getElementById("carritoContainer");
+
+const confirmarBtn = document.getElementById("confirmarBtn");
+
+const userLink = document.getElementById("userLink");
+
+onAuthStateChanged(auth, (user) => {
+
+  if(!user){
+
+    window.location.href = "login.html";
+
+    return;
+
+  }
+
+  userLink.textContent = user.email;
+
+  userLink.href = "#";
+
+  userLink.addEventListener("click", async () => {
+
+    await signOut(auth);
+
+    window.location.reload();
+
   });
+
+  const carritoRef = ref(
+    db,
+    `carritos/${user.uid}`
+  );
+
+  onValue(carritoRef, (snapshot) => {
+
+    container.innerHTML = "";
+
+    snapshot.forEach((child) => {
+
+      const producto = child.val();
+
+      const key = child.key;
+
+      const card = document.createElement("article");
+
+      card.classList.add("product-card");
+
+      card.innerHTML = `
+
+        <img src="${producto.imagen}">
+
+        <div class="product-info">
+
+          <h3 class="product-title">
+            ${producto.nombre}
+          </h3>
+
+          <p class="product-price">
+            $${producto.precio} MXN
+          </p>
+
+          <button class="delete-btn">
+            Eliminar
+          </button>
+
+        </div>
+
+      `;
+
+      const deleteBtn = card.querySelector(".delete-btn");
+
+      deleteBtn.addEventListener("click", async () => {
+
+        await remove(
+          ref(db, `carritos/${user.uid}/${key}`)
+        );
+
+      });
+
+      container.appendChild(card);
+
+    });
+
+  });
+
+  confirmarBtn.addEventListener("click", async () => {
+
+    const ordenRef = ref(
+      db,
+      `ordenes/${user.uid}`
+    );
+
+    const carritoSnapshotRef = ref(
+      db,
+      `carritos/${user.uid}`
+    );
+
+    onValue(carritoSnapshotRef, async (snapshot) => {
+
+      if(!snapshot.exists()){
+
+        alert("Carrito vacío");
+
+        return;
+
+      }
+
+      const productos = [];
+
+      snapshot.forEach((child) => {
+
+        productos.push(child.val());
+
+      });
+
+      await push(ordenRef, {
+
+        fecha: new Date().toLocaleString(),
+
+        productos
+
+      });
+
+      await remove(carritoSnapshotRef);
+
+      alert("Compra confirmada");
+
+    }, {
+      onlyOnce:true
+    });
+
+  });
+
+});
+
 </script>
 
 </body>
